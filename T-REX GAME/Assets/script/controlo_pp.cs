@@ -14,13 +14,16 @@ public class controlo_pp : MonoBehaviour
     public bool cold_down = false;
     public float contador_cold_down;
     public bool salto;
+
+    public bool vida = true;
+
     void Update()
     {
         //------SALTAR-----------------------------
         if (Input.GetKey(KeyCode.Space) == true && cold_down == false)
         {
 
-            rb.AddForce(0, 3, 0);
+            rb.AddForce(0,2, 0);
 
 
             ativa_contador = true;
@@ -57,5 +60,13 @@ public class controlo_pp : MonoBehaviour
 
 
         }
+
+        //---vida e morte--------
+        if (vida == false)
+        {
+            pp.SetActive(false);
+        }
+
+
     }
 }
