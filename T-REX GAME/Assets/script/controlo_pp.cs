@@ -22,7 +22,7 @@ public class controlo_pp : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) == true && cold_down == false)
         {
 
-            rb.AddForce(0, 2, 0);
+            rb.AddForce(0, 3, 0);
 
 
             ativa_contador = true;
