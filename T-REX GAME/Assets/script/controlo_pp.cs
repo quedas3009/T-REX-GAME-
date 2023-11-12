@@ -10,12 +10,11 @@ public class controlo_pp : MonoBehaviour
     public float contador_salto;
     public bool ativa_contador;
 
-
     public bool cold_down = false;
     public float contador_cold_down;
     public bool salto;
 
-    public bool vida = true;
+
 
     void Update()
     {
@@ -23,7 +22,7 @@ public class controlo_pp : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) == true && cold_down == false)
         {
 
-            rb.AddForce(0,2, 0);
+            rb.AddForce(0, 2, 0);
 
 
             ativa_contador = true;
@@ -56,17 +55,12 @@ public class controlo_pp : MonoBehaviour
         if (Input.GetKey(KeyCode.L) == true)
         {
 
-            pp.transform.Rotate(0, 0, 10);
+            pp.transform.Rotate(0, 0, -1000*Time.deltaTime);
 
 
         }
 
-        //---vida e morte--------
-        if (vida == false)
-        {
-            pp.SetActive(false);
-        }
-
+     
 
     }
 }
