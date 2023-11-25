@@ -6,61 +6,64 @@ public class controlo_pp : MonoBehaviour
 {
     public GameObject pp;
     public Rigidbody rb;
+    Vector3 salto;
 
-    public float contador_salto;
-    public bool ativa_contador;
+    float pesomaximo = 1f;
+    float hora_de;
 
-    public bool cold_down = false;
-    public float contador_cold_down;
-    public bool salto;
 
+    float velocidadesalto;
+    float gravidade;
+
+    bool nochão = false;
+
+
+
+    private void Start()
+    {
+        gravidade = (2 * pesomaximo) / Mathf.Pow(hora_de,2);
+        velocidadesalto = gravidade * hora_de;
+
+    }
 
 
     void Update()
     {
         //------SALTAR-----------------------------
-        if (Input.GetKey(KeyCode.Space) == true && cold_down == false)
+
+        salto += gravidade * Time.deltaTime * Vector3.down;
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow))
         {
-
-            rb.AddForce(0, 3, 0);
-
-
-            ativa_contador = true;
-            salto = true;
-        }
-        if (salto == true && contador_salto >= 1.5)
-        {
-            cold_down = false;
-            contador_salto = 0;
-            salto = false;
-            ativa_contador = false;
+            salto = velocidadesalto * Vector3.up;
         }
 
-        //gravidade do salto
-        if (salto == true && contador_salto >= 0.5)
-        {
-            cold_down = true;
-            rb.AddForce(0, -3, 0);
-        }
-
-        //contador do salto
-        if (ativa_contador == true)
-        {
-            contador_salto = contador_salto + 1 * Time.deltaTime;
-        }
-
+        transform.position += (Vector3)salto * Time.deltaTime;
         //-------------------------------------------
 
 
         if (Input.GetKey(KeyCode.L) == true)
         {
 
-            pp.transform.Rotate(0, 0, -1000*Time.deltaTime);
+            pp.transform.Rotate(0, 0, -1000 * Time.deltaTime);
 
 
         }
 
-     
+
+
+
+
+
+        if (Input.GetKey(KeyCode.RightArrow) == true)
+        {
+            pp.transform.Translate(9 * Time.deltaTime, 0, 0);
+        }
+        if (Input.GetKey(KeyCode.LeftArrow) == true)
+        {
+            pp.transform.Translate(-9  * Time.deltaTime, 0, 0);
+        }
+
 
     }
 }
