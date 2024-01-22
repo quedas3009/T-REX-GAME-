@@ -1,24 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class gerador : MonoBehaviour
 {
     public GameObject mapa;
     public GameObject player;
 
-    
+    public GameObject menu;
+    public GameObject tuturial;
+
+    public GameObject exit;
+    public GameObject exitmenu;
+    public GameObject exit2;
+    public GameObject exit3;
+    public GameObject exit4;
+    public GameObject exit5;
+
+
     public GameObject cacto;
     public GameObject cacto2;
     public GameObject cacto3;
     public GameObject passaro;
 
+   
+
 
 
     private bool gerandoCacto1 = false; // Controle para o cacto1
     private bool gerandoCacto2 = false; // Controle para o cacto2
-    private bool gerandoCacto3 = false; 
-    private bool gerandoCacto4 = false; 
+    private bool gerandoCacto3 = false;
+    private bool gerandoCacto4 = false;
 
 
 
@@ -35,52 +48,61 @@ public class gerador : MonoBehaviour
     public Vector3 playerposição;
     public Vector3 frenteplayer;
     public Vector3 passaroposiçao;
-
+    public Vector3 passaroposiçao3;
+    public Vector3 passaroposiçao2;
     public float playerposiçãox;
     public int GERADORDEOBJETOS;
 
 
     void Update()
     {
-        tempo2completo = tempo2 * tempo2;
-
-        if (start == true)
-        {
-            player.transform.Translate((20 + (2/ tempo2)) * Time.deltaTime, 0, 0);
-            mapa.transform.Translate((20 + (2 /tempo2)) * Time.deltaTime, 0, 0);
-        }
-
-        if (start == true)
-        {
-            tempo = tempo + -3 * Time.deltaTime;
-            tempo2 = tempo2 + 3 * Time.deltaTime;
-            
-        }
-
-       
-
-       Vector3 playerposição = player.transform.position;
 
         
 
 
+        tempo2completo = tempo2 * tempo2;
 
         if (start == true)
         {
-            tempo3 = tempo3 +1 * Time.deltaTime;
+            player.transform.Translate((-40 + (1 / tempo2)) * Time.deltaTime, 0, 0);
+            mapa.transform.Translate((40 + (1 / tempo2)) * Time.deltaTime, 0, 0);
+
+
+        }
+
+        if (start == true)  
+        {
+            tempo = tempo + -3 * Time.deltaTime;
+            tempo2 = tempo2 + 3 * Time.deltaTime;
+
+        }
+
+       
+
+       
+
+        Vector3 playerposição = player.transform.position;
+
+
+
+
+
+        if (start == true)
+        {
+            tempo3 = tempo3 + 1 * Time.deltaTime;
             coldow_gerador = coldow_gerador + 1 * Time.deltaTime;
         }
         if (tempo3 > 1.5)
         {
-            GERADORDEOBJETOS = Random.RandomRange(1, 5);
-            
+            GERADORDEOBJETOS = Random.RandomRange(1, 6);
+
         }
         if (tempo3 > 1.6)
         {
             tempo3 = 0;
             coldow_gerador = 0;
         }
-       
+
 
         if (delete_triger == true)
         {
@@ -92,38 +114,58 @@ public class gerador : MonoBehaviour
         }
 
 
+      
 
-        
 
-        frenteplayer = transform.position = new Vector3(playerposição.x + 80, 1, playerposição.z);
-        passaroposiçao = transform.position = new Vector3(playerposição.x + 80, (float)4.30, playerposição.z);
+        frenteplayer = transform.position = new Vector3(playerposição.x + 100, 1, playerposição.z);
+        passaroposiçao = transform.position = new Vector3(playerposição.x + 100, 6, playerposição.z);
+        passaroposiçao2 = transform.position = new Vector3(playerposição.x + 100, 4, playerposição.z);
+        passaroposiçao3 = transform.position = new Vector3(playerposição.x + 100, 5, playerposição.z);
 
-        if (start && GERADORDEOBJETOS == 1 && coldow_gerador >= 1 && coldow_gerador <= 1.1 && !gerandoCacto1)
+        if (start==true  && GERADORDEOBJETOS == 1 && coldow_gerador >= 1 && coldow_gerador <= 1.1 && !gerandoCacto1)
         {
             gerandoCacto1 = true;
-            Instantiate(cacto, frenteplayer, Quaternion.identity);
+            GameObject clone = Instantiate(cacto, frenteplayer, Quaternion.identity);
+            clone.tag = "morte";
             delete_triger = true;
+           
         }
-        else if (start && GERADORDEOBJETOS == 2 && coldow_gerador >= 1 && coldow_gerador <= 1.1 && !gerandoCacto2)
+        else if (start==true && GERADORDEOBJETOS == 2 && coldow_gerador >= 1 && coldow_gerador <= 1.1 && !gerandoCacto2)
         {
             gerandoCacto2 = true;
             Instantiate(cacto2, frenteplayer, Quaternion.identity);
             delete_triger = true;
         }
-        else if(start && GERADORDEOBJETOS == 3 && coldow_gerador >= 1 && coldow_gerador <= 1.1 && !gerandoCacto3)
+        else if (start==true && GERADORDEOBJETOS == 3 && coldow_gerador >= 1 && coldow_gerador <= 1.1 && !gerandoCacto3)
         {
             gerandoCacto3 = true;
             Instantiate(cacto3, frenteplayer, Quaternion.identity);
             delete_triger = true;
         }
-        else if (start && GERADORDEOBJETOS == 4 && coldow_gerador >= 1 && coldow_gerador <= 1.1 && !gerandoCacto4)
+        else if (start== true && GERADORDEOBJETOS == 4 && coldow_gerador >= 1 && coldow_gerador <= 1.1 && !gerandoCacto4)
         {
             gerandoCacto4 = true;
-            Instantiate(passaro, passaroposiçao, Quaternion.identity);
+            GameObject clone1 = Instantiate(passaro, passaroposiçao, Quaternion.identity);
+            clone1.tag = "morte";
             delete_triger = true;
+
         }
+        else if (start == true && GERADORDEOBJETOS == 5 && coldow_gerador >= 1 && coldow_gerador <= 1.1 && !gerandoCacto4)
+        {
+            gerandoCacto4 = true;
+            GameObject clone1 = Instantiate(passaro, passaroposiçao2, Quaternion.identity);
+            clone1.tag = "morte";
+            delete_triger = true;
 
+        }
+        else if (start == true && GERADORDEOBJETOS == 6 && coldow_gerador >= 1 && coldow_gerador <= 1.1 && !gerandoCacto4)
+        {
+            gerandoCacto4 = true;
+            GameObject clone1 = Instantiate(passaro, passaroposiçao3, Quaternion.identity);
+            clone1.tag = "morte";
+            delete_triger = true;
 
+        }
 
 
         if (gerandoCacto1 == true && delete_object > 2)
@@ -148,18 +190,55 @@ public class gerador : MonoBehaviour
         }
 
 
-
-
-
-
+        player.transform.position = new Vector3(playerposição.x, playerposição.y, 0);
 
     }
 
 
-   
+
 
     public void começo()
     {
+        menu.SetActive(false);
         start = true;
     }
+
+
+
+    public void tuturial_abrir()
+    {
+        tuturial.SetActive(true);
+    }
+    public void tuturial_fechar()
+    {
+        tuturial.SetActive(false);
+    }
+
+
+
+    public void exitmenu1()
+    {
+        Application.Quit();
+    }
+    /*
+    public void exit_0()
+    {
+        exit.SetActive(false);
+        exit2.SetActive(true);
+    }
+    public void exit_1()
+    {
+        exit2.SetActive(false);
+        exit3.SetActive(true);
+    }
+    public void exit_2()
+    {
+        exit3.SetActive(false);
+        exit4.SetActive(true);
+    }
+    public void exit_3()
+    {
+        tr
+    }
+    */
 }

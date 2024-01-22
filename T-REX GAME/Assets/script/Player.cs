@@ -4,56 +4,104 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    //gameObjetos do jogo e configuraçoes para os gameobjects
     public GameObject pp;
     public Rigidbody rb;
+    public GameObject map;
 
-    public bool nochau;
+    public AudioSource jump;
+
+    public float jumpforce;
+
    
 
+    public bool nochau;
+    public static bool morreu;
+
+    private float zposição;
+    private float yposição;
+    private float xposição;
+
+   
+    
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Space) && gerador.start == true )
+        //jump
+        if ( Input.GetKey(KeyCode.Space) && nochau==true && gerador.start)
         {
+          rb.AddForce(0, (float)jumpforce, 0, ForceMode.Impulse);
+            jump.Play();
 
-            if (nochau == true)
-            {
-             rb.AddForce(0, 20, 0, ForceMode.Impulse);
-            }
-            
         }
+        else if(nochau == false)
+        {
+            rb.AddForce(0, -15, 0, ForceMode.Force);
+        }
+
+
+
+
+
+
+
+
+
+        //ir para baixo
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            print("caiste");
-            rb.AddForce(0, -1, 0, ForceMode.Force);
-        }
-
-        if (nochau == false)
-        {
-            print("caiste");
-            rb.AddForce(0, -1, 0, ForceMode.Force);
+            
+            rb.AddForce(0, -3, 0, ForceMode.Force);
         }
 
 
+       
+
+
+
+
+
+        Vector3 playerposição = pp.transform.position;
+
+
+        xposição = playerposição.x;
+        yposição = playerposição.y;
+        zposição = playerposição.z;
+
+
+        
+        
+        
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "floor")
         {
-            print("tocou");
+            
             nochau = true;
         }
+
+        if (other.gameObject.tag == "morte")
+        {
+
+            morreu = true;
+        }
+
+
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "floor")
         {
-            print("saiu");
+            
             nochau = false;
         }
     }
+
+   
+
+
 
 
 }
