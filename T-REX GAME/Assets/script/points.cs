@@ -9,6 +9,8 @@ public class points : MonoBehaviour
     private int contador = 0;
     public float intervaloAtualizacao = 1f; // Atualiza a cada segundo
 
+    public static int poinst;
+
     public int score = 0;
 
     public GameObject image;
@@ -28,13 +30,17 @@ public class points : MonoBehaviour
 
     public void Update()
     {
+        poinst =contador ;
+
         if (gerador.start == false)
         {
+            
             contador = 0;
             contadortex.SetActive(false);
         }
         if (gerador.start == true)
         {
+           
             contadortex.SetActive(true);
 
         }

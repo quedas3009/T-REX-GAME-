@@ -17,31 +17,47 @@ public class Player : MonoBehaviour
 
     public bool nochau;
     public static bool morreu;
+   
 
     private float zposição;
     private float yposição;
     private float xposição;
 
-   
+
+    public bool salto;
+
+
+
+
+
     
     void Update()
     {
         //jump
         if ( Input.GetKey(KeyCode.Space) && nochau==true && gerador.start)
         {
-          rb.AddForce(0, (float)jumpforce, 0, ForceMode.Impulse);
-            jump.Play();
+            salto = true;
+            
+
+
+            
+                jump.Play();
+                
+            
+
 
         }
         else if(nochau == false)
         {
             rb.AddForce(0, -15, 0, ForceMode.Force);
+            salto = false;
         }
 
 
-
-
-
+        if (salto == true && nochau==true && gerador.start ==true)
+        {
+            rb.AddForce(0, (float)jumpforce, 0, ForceMode.Impulse);
+        }
 
 
 
@@ -85,6 +101,7 @@ public class Player : MonoBehaviour
         {
 
             morreu = true;
+            menu.deathmenuon = true;
         }
 
 

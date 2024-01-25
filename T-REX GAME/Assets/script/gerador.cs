@@ -8,7 +8,7 @@ public class gerador : MonoBehaviour
     public GameObject mapa;
     public GameObject player;
 
-    public GameObject menu;
+    public GameObject menufist;
     public GameObject tuturial;
 
     public GameObject exit;
@@ -53,33 +53,50 @@ public class gerador : MonoBehaviour
     public float playerposiçãox;
     public int GERADORDEOBJETOS;
 
+    public float timer_forfast;
+    public float dobrarpelotempo;
 
     void Update()
     {
 
         
-
+        
 
         tempo2completo = tempo2 * tempo2;
 
         if (start == true)
         {
-            player.transform.Translate((-40 + (1 / tempo2)) * Time.deltaTime, 0, 0);
-            mapa.transform.Translate((40 + (1 / tempo2)) * Time.deltaTime, 0, 0);
+            player.transform.Translate((-40  * Time.deltaTime) * dobrarpelotempo, 0, 0);
+            mapa.transform.Translate((40   * Time.deltaTime)*dobrarpelotempo, 0, 0);
 
 
-        }
 
-        if (start == true)  
-        {
+            timer_forfast = timer_forfast + 1 * Time.deltaTime;
+            dobrarpelotempo = timer_forfast / 4;
+
+            menu.firstmenuon = true;
+
+
+
+
+
             tempo = tempo + -3 * Time.deltaTime;
             tempo2 = tempo2 + 3 * Time.deltaTime;
+        }
+        if (start == false)
+        {
+            dobrarpelotempo = 0;
+            timer_forfast = 0;
+        }
+        if (dobrarpelotempo > 3.7)
+        {
+            dobrarpelotempo = 3;
 
         }
-
-       
-
-       
+        if (points.poinst > 25)
+        {
+            dobrarpelotempo = 4;
+        }
 
         Vector3 playerposição = player.transform.position;
 
@@ -199,8 +216,10 @@ public class gerador : MonoBehaviour
 
     public void começo()
     {
-        menu.SetActive(false);
+        menufist.SetActive(false);
         start = true;
+
+        menu.firstmenuon = true;
     }
 
 
@@ -208,9 +227,13 @@ public class gerador : MonoBehaviour
     public void tuturial_abrir()
     {
         tuturial.SetActive(true);
+        menu.firstmenuon = false;
+        menu.tuturialmenuon = true;
     }
     public void tuturial_fechar()
     {
+        menu.tuturialmenuon = false;
+        menu.firstmenuon = true;
         tuturial.SetActive(false);
     }
 

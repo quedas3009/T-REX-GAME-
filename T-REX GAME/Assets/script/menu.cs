@@ -9,11 +9,15 @@ public class menu : MonoBehaviour
     public GameObject dethmenu1;
 
 
-
+    public AudioSource musicmenu;
+    public AudioSource musicdeath;
+    public AudioSource musictuturial;
 
     public string deleteobjetos = "morte";
 
-
+    public static bool firstmenuon;
+    public static bool deathmenuon;
+    public static bool tuturialmenuon;
 
 
     private void Start()
@@ -32,7 +36,31 @@ public class menu : MonoBehaviour
 
         }
 
-       
+        if (firstmenuon == true)
+        {
+            musicmenu.Play();
+        }
+        if (firstmenu == false)
+        {
+            musicmenu.Stop();
+        }
+        if (tuturialmenuon == true)
+        {
+            musictuturial.Play();
+        }
+        if (tuturialmenuon == false)
+        {
+            musictuturial.Stop();
+        }
+        if (deathmenuon == true)
+        {
+            musicdeath.Play();
+        }
+        if (musicdeath == false)
+        {
+            musicdeath.Stop();
+        }
+
 
 
     }
@@ -65,6 +93,7 @@ public class menu : MonoBehaviour
         Player.morreu = false;
         deathmenu.SetActive(false);
         firstmenu.SetActive(true);
-        
-   }
+        firstmenuon = true;
+        menu.deathmenuon = false;
+    }
 }
